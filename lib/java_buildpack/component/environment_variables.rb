@@ -40,7 +40,7 @@ module JavaBuildpack
       # @param [String] value the variable value
       # @return [EnvironmentVariables] +self+ for chaining
       def add_environment_variable(key, value)
-        self << "#{key}=#{qualify_value(value)}"
+        self << "env \"#{key}=#{qualify_value(value)}\""
       end
 
       # Returns the contents as an environment variable formatted as +<key>=<value>+
