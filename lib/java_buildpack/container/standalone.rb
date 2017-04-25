@@ -39,7 +39,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
-        @droplet.environment_variables.add_environment_variable 'JBOSS_HTTP_PORT', '$PORT'
+        @droplet.java_opts.add_system_property 'jboss.http.port', '$PORT'
         [
           @droplet.environment_variables.as_env_vars,
           @droplet.java_home.as_env_var,
