@@ -61,7 +61,7 @@ module JavaBuildpack
       #
       # @return [Pathname] the root directory of the application
       def root
-        find_single_directory || @droplet.root
+        @application.root
       end
 
       # Whether or not this component supports this application
