@@ -44,6 +44,10 @@ module JavaBuildpack
         @droplet.java_opts.add_system_property 'java.net.preferIPv4Stack', 'true'
         @droplet.java_opts.add_system_property 'jboss.modules.system.pkgs', 'org.jboss.byteman'
         @droplet.java_opts.add_system_property 'java.awt.headless', 'true'
+        @droplet.java_opts.add_system_property 'keycloak.migration.action', 'import'
+        @droplet.java_opts.add_system_property 'keycloak.migration.provider', 'singleFile'
+        @droplet.java_opts.add_system_property 'keycloak.migration.file', 'bin/bootstrap.json'
+        @droplet.java_opts.add_system_property 'keycloak.migration.strategy', 'OVERWRITE_EXISTING'
         [
           @droplet.environment_variables.as_env_vars,
           @droplet.java_home.as_env_var,
