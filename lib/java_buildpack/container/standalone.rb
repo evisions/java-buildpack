@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'uri'
 require 'java_buildpack/component/base_component'
 require 'java_buildpack/container'
 require 'java_buildpack/util/find_single_directory'
@@ -48,6 +49,15 @@ module JavaBuildpack
         @droplet.java_opts.add_system_property 'keycloak.migration.provider', 'singleFile'
         @droplet.java_opts.add_system_property 'keycloak.migration.file', 'bin/bootstrap.json'
         @droplet.java_opts.add_system_property 'keycloak.migration.strategy', 'OVERWRITE_EXISTING'
+        if @application.services.one_service?(/db/, 'uri')
+          service = @application.services.find_service(/db/, 'uri')
+          db_uri = URI.parse(service['credentials']['uri'])
+          $droplet.java_opts.add_system_property 'keycloak.db.host', db_uri.host
+          $droplet.java_opts.add_system_property 'keycloak.db.port', db_uri.port
+          $droplet.java_opts.add_system_property 'keycloak.db.database', db_uri.path[1..-1]
+          $droplet.java_opts.add_system_property 'keycloak.db.user', db_uri.user
+          $droplet.java_opts.add_system_property 'keycloak.db.password', db_uri.password
+        end
         [
           @droplet.environment_variables.as_env_vars,
           @droplet.java_home.as_env_var,
