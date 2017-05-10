@@ -52,11 +52,11 @@ module JavaBuildpack
         if @application.services.one_service?(/postgresql/, 'uri')
           service = @application.services.find_service(/postgresql/)
           db_uri = URI.parse(service['credentials']['uri'])
-          $droplet.java_opts.add_system_property 'keycloak.db.host', db_uri.host
-          $droplet.java_opts.add_system_property 'keycloak.db.port', db_uri.port
-          $droplet.java_opts.add_system_property 'keycloak.db.database', db_uri.path[1..-1]
-          $droplet.java_opts.add_system_property 'keycloak.db.user', db_uri.user
-          $droplet.java_opts.add_system_property 'keycloak.db.password', db_uri.password
+          @droplet.java_opts.add_system_property 'keycloak.db.host', db_uri.host
+          @droplet.java_opts.add_system_property 'keycloak.db.port', db_uri.port
+          @droplet.java_opts.add_system_property 'keycloak.db.database', db_uri.path[1..-1]
+          @droplet.java_opts.add_system_property 'keycloak.db.user', db_uri.user
+          @droplet.java_opts.add_system_property 'keycloak.db.password', db_uri.password
         end
         [
           @droplet.environment_variables.as_env_vars,
