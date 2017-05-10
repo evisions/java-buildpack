@@ -50,7 +50,7 @@ module JavaBuildpack
         @droplet.java_opts.add_system_property 'keycloak.migration.file', 'bin/bootstrap.json'
         @droplet.java_opts.add_system_property 'keycloak.migration.strategy', 'OVERWRITE_EXISTING'
         if @application.services.one_service?(/postgresql/, 'uri')
-          service = @application.services.find_service(/postgresql/, 'uri')
+          service = @application.services.find_service(/postgresql/)
           db_uri = URI.parse(service['credentials']['uri'])
           $droplet.java_opts.add_system_property 'keycloak.db.host', db_uri.host
           $droplet.java_opts.add_system_property 'keycloak.db.port', db_uri.port
