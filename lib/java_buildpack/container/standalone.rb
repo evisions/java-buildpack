@@ -45,10 +45,10 @@ module JavaBuildpack
         @droplet.java_opts.add_system_property 'java.net.preferIPv4Stack', 'true'
         @droplet.java_opts.add_system_property 'jboss.modules.system.pkgs', 'org.jboss.byteman'
         @droplet.java_opts.add_system_property 'java.awt.headless', 'true'
-        @droplet.java_opts.add_system_property 'keycloak.migration.action', 'import'
-        @droplet.java_opts.add_system_property 'keycloak.migration.provider', 'singleFile'
-        @droplet.java_opts.add_system_property 'keycloak.migration.file', 'bin/bootstrap.json'
-        @droplet.java_opts.add_system_property 'keycloak.migration.strategy', 'OVERWRITE_EXISTING'
+        # @droplet.java_opts.add_system_property 'keycloak.migration.action', 'import'
+        # @droplet.java_opts.add_system_property 'keycloak.migration.provider', 'singleFile'
+        # @droplet.java_opts.add_system_property 'keycloak.migration.file', 'bin/bootstrap.json'
+        # @droplet.java_opts.add_system_property 'keycloak.migration.strategy', 'OVERWRITE_EXISTING'
         if @application.services.one_service?(/postgresql/, 'uri')
           service = @application.services.find_service(/postgresql/)
           db_uri = URI.parse(service['credentials']['uri'])
