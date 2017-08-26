@@ -35,7 +35,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-        standalone_path.chmod 0o755
+        artifactory_sh_path.chmod 0o755
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
@@ -58,7 +58,7 @@ module JavaBuildpack
           @droplet.java_home.as_env_var,
           @droplet.java_opts.as_env_var,
           'exec',
-          qualify_path(standalone_path, @droplet.root)
+          qualify_path(artifactory_sh_path, @droplet.root)
         ].flatten.compact.join(' ')
       end
 
@@ -68,7 +68,7 @@ module JavaBuildpack
       #
       # @return [String] the id of this container
       def id
-        Standalone.to_s.dash_case
+        Artifactory.to_s.dash_case
       end
 
       # The root directory of the application
@@ -82,10 +82,10 @@ module JavaBuildpack
       #
       # @return [Boolean] whether or not this component supports this application
       def supports?
-        standalone_path.exist?
+        artifactory_sh_path.exist?
       end
 
-      def standalone_path
+      def artifactory_sh_path
         Pathname.new("#{root}/bin/artifactory.sh")
       end
 
