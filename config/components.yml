@@ -17,6 +17,7 @@
 ---
 containers:
   - "JavaBuildpack::Container::Standalone"
+  - "JavaBuildpack::Container::Artifactory"
   - "JavaBuildpack::Container::DistZip"
   - "JavaBuildpack::Container::Groovy"
   - "JavaBuildpack::Container::JavaMain"
