@@ -40,8 +40,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
-        @droplet.java_opts.add_system_property 'sever.port', '$PORT'
-        @droplet.java_opts.add_system_property 'jboss.bind.address', '0.0.0.0'
+        @droplet.java_opts.add_system_property 'server.port', '$PORT'
         @droplet.java_opts.add_system_property 'java.net.preferIPv4Stack', 'true'
         @droplet.java_opts.add_system_property 'java.awt.headless', 'true'
         if @application.services.one_service?(/postgresql/, 'uri')
